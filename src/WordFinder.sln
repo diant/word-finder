@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordFinder.Core", "WordFinder.Core\WordFinder.Core.csproj", "{5CF3DDF2-D8D2-4208-8F44-22D8F61E4E2C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{04E8AE3E-975F-4E56-81F5-44B616ABC85C}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFinder.CLI", "WordFinder.CLI\WordFinder.CLI.csproj", "{624DCD72-34F1-4221-8BE6-BD35DCA976E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFinder.CLI.UnitTests", "..\test\WordFinder.CLI.UnitTests\WordFinder.CLI.UnitTests.csproj", "{590212AC-6F95-4413-BFFD-27D873C928A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{27006F85-F94D-462B-B036-A54B0F8BA7AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFinder.Core.UnitTests", "..\test\WordFinder.Core.UnitTests\WordFinder.Core.UnitTests.csproj", "{E142BD53-D7E9-47A6-BC58-E4AE0E665F66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CF3DDF2-D8D2-4208-8F44-22D8F61E4E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF3DDF2-D8D2-4208-8F44-22D8F61E4E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF3DDF2-D8D2-4208-8F44-22D8F61E4E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF3DDF2-D8D2-4208-8F44-22D8F61E4E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624DCD72-34F1-4221-8BE6-BD35DCA976E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624DCD72-34F1-4221-8BE6-BD35DCA976E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624DCD72-34F1-4221-8BE6-BD35DCA976E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624DCD72-34F1-4221-8BE6-BD35DCA976E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{590212AC-6F95-4413-BFFD-27D873C928A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{590212AC-6F95-4413-BFFD-27D873C928A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{590212AC-6F95-4413-BFFD-27D873C928A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{590212AC-6F95-4413-BFFD-27D873C928A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E142BD53-D7E9-47A6-BC58-E4AE0E665F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E142BD53-D7E9-47A6-BC58-E4AE0E665F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E142BD53-D7E9-47A6-BC58-E4AE0E665F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E142BD53-D7E9-47A6-BC58-E4AE0E665F66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{590212AC-6F95-4413-BFFD-27D873C928A5} = {27006F85-F94D-462B-B036-A54B0F8BA7AC}
+		{E142BD53-D7E9-47A6-BC58-E4AE0E665F66} = {27006F85-F94D-462B-B036-A54B0F8BA7AC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE68A6A1-8BFF-4523-856E-E8AFC31A8DE3}
+	EndGlobalSection
+EndGlobal
