@@ -14,7 +14,7 @@ Thanks to [dwyl](https://github.com/dwyl) for the word list
 - `dotnet pack -c Release`
 - `dotnet tool install -g --add-source .\nupkg wfind`
 
-Once isntalled, update with `dotnet tool update -g --add-source .\nupkg wfind`
+Once installed, update with `dotnet tool update -g --add-source .\nupkg wfind`
 
 ### Usage
 

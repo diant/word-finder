@@ -23,16 +23,8 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
             return Task.FromResult(0);
         }
 
-        var validatorResult = validator.Validate(request);
-        if (!validatorResult.IsValid)
+        if(!ValidateRequest(request))
         {
-            _console.ForegroundColor = ConsoleColor.Red;
-            foreach (var error in validatorResult.Errors)
-            {
-                _console.WriteLine(error.ErrorMessage);
-            }
-            _console.ResetColor();
-            _console.WriteLine($"\nPlease try again");
             return Task.FromResult(0);
         }
         
@@ -57,5 +49,23 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
         }
 
         return Task.FromResult(0);
+    }
+
+    private bool ValidateRequest(MainCmdRequest request)
+    {
+        var validatorResult = validator.Validate(request);
+        if (!validatorResult.IsValid)
+        {
+            _console.ForegroundColor = ConsoleColor.Red;
+            foreach (var error in validatorResult.Errors)
+            {
+                _console.WriteLine(error.ErrorMessage);
+            }
+            _console.ResetColor();
+            _console.WriteLine($"\nPlease try again");
+            return false;
+        }
+
+        return true;
     }
 }

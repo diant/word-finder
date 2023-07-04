@@ -14,13 +14,13 @@ public static class WordFinder
         return new Dictionary<int, string[]> { { 0, finalResult.ToArray() } };
     }
 
-    public static Dictionary<int, string[]> GroupwordsByLength(IEnumerable<string> words)
+    private static Dictionary<int, string[]> GroupwordsByLength(IEnumerable<string> words)
     {
         return words.GroupBy(w => w.Length).ToDictionary(g => g.Key, g => g.Select(g => string.Join(", ", g)).ToArray());
     }   
 
 
-    public static List<string> FindWords(IEnumerable<string> words, string letters)
+    private static List<string> FindWords(IEnumerable<string> words, string letters)
     {
         List<string> result = new();
         foreach (string word in words)
