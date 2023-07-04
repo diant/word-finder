@@ -30,11 +30,15 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
 
         //_console.BackgroundColor = ConsoleColor.DarkCyan;
         _console.ForegroundColor = ConsoleColor.Gray;
-        _console.WriteLine("WordFinder CLI tool\nFind all possible words for given letters");
+        //_console.WriteLine("WordFinder CLI tool\nFind all possible words for given letters");
         _console.WriteLine($"Letters: `{request.Letters}`\tGrouped: `{request.Grouped}`");
+        if (!string.IsNullOrWhiteSpace(request.Contains))
+        {
+            _console.WriteLine($"Contains: `{request.Contains}`");
+        }
         _console.ResetColor();
 
-        var wordGroups = await Core.WordFinder.Find(request.Letters, request.Grouped);
+        var wordGroups = await Core.WordFinder.Find(request.Letters, request.Grouped, request.Contains);
         if (request.Grouped)
         {
             foreach (var group in wordGroups.OrderByDescending(x => x.Key))

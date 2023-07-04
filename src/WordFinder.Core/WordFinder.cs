@@ -2,19 +2,27 @@
 
 public static class WordFinder
 {
-    public static async Task<Dictionary<int,string[]>> Find(string letters, bool grouped = true)
+    public static async Task<Dictionary<int,string[]>> Find(
+        string letters, 
+        bool grouped = true, 
+        string? contains = default)
     {
         var words = await WordsReader.GetWords();
-        var finalResult = FindWords(words, letters);
+        var result = FindWords(words, letters);
+
+        if (!string.IsNullOrEmpty(contains))
+        {
+            result = result.Where(w => w.Contains(contains)).ToList();
+        }
 
         if (grouped)
         {
-            return GroupwordsByLength(finalResult);
+            return GroupWordsByLength(result);
         }
-        return new Dictionary<int, string[]> { { 0, finalResult.ToArray() } };
+        return new Dictionary<int, string[]> { { 0, result.ToArray() } };
     }
 
-    private static Dictionary<int, string[]> GroupwordsByLength(IEnumerable<string> words)
+    private static Dictionary<int, string[]> GroupWordsByLength(IEnumerable<string> words)
     {
         return words.GroupBy(w => w.Length).ToDictionary(g => g.Key, g => g.Select(g => string.Join(", ", g)).ToArray());
     }

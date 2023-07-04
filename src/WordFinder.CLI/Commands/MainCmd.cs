@@ -36,7 +36,17 @@ namespace WordFinder.CLI.Commands
         )]
         public bool NoGroup { get; set; } = false;
 
-        public Task<int> OnExecute(CommandLineApplication app) => _mediator.Send(new MainCmdRequest(app, Letters, !NoGroup));
+        [Option(            
+        Description = "Shows only words that contain the given string",
+                       ShortName = "c",
+                       LongName = "contains",
+                       ShowInHelpText = true,
+                       Inherited = true,
+                       ValueName = "SUBSTRING"
+                   )]
+        public string Contains { get; set; } = default;
+
+        public Task<int> OnExecute(CommandLineApplication app) => _mediator.Send(new MainCmdRequest(app, Letters, !NoGroup, Contains));
 
         private static string GetVersion() => typeof(MainCmd).Assembly.GetName().Version!.ToString();
     }
