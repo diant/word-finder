@@ -3,7 +3,14 @@ using MediatR;
 
 namespace WordFinder.CLI.Commands
 {
-    [Command("wfind", Description = "WordFinder CLI tool\nFind all possible words for given letters")]
+    [Command("wfind",
+        Description = @$"
+*************************************************
+*   WordFinder CLI tool                         *
+*   Find all possible words for given letters   *
+*************************************************
+"
+    )]
     [VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]
     internal sealed class MainCmd
     {
@@ -11,7 +18,7 @@ namespace WordFinder.CLI.Commands
         public MainCmd(IMediator mediator) => _mediator = mediator;
 
         [Option(
-            Description = "Input letters (max 8)\nUse the wildcard `*` for any letter",
+            Description = "Input letters (max 8)",
             ShortName = "l",
             LongName = "letters",
             ShowInHelpText = true,
