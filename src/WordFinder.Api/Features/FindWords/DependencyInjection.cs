@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WordFinder.Api.Middlewares;
 
 namespace WordFinder.Api.Features.FindWords;
 
@@ -11,6 +12,8 @@ public static class DependencyInjection
         {
             configuration.RegisterServicesFromAssemblyContaining<Program>();
         });
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
         return services;
     }
