@@ -12,7 +12,9 @@ Thanks to [dwyl](https://github.com/dwyl) for the word list
 ### Installation
 
 - `dotnet pack -c Release`
-- `dotnet tool update -g --add-source .\nupkg wfind`
+- `dotnet tool install -g --add-source .\nupkg wfind`
+
+Once isntalled, update with `dotnet tool update -g --add-source .\nupkg wfind`
 
 ### Usage
 
