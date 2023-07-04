@@ -5,9 +5,9 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
 	<LangVersion>latest</LangVersion>
-	<AssemblyName>wfinder</AssemblyName>
+	<AssemblyName>wfind</AssemblyName>
 	<PackAsTool>true</PackAsTool>
-	<ToolCommandName>wfinder</ToolCommandName>
+	<ToolCommandName>wfind</ToolCommandName>
 	<PackageOutputPath>./nupkg</PackageOutputPath>	  
   </PropertyGroup>
 
@@ -21,6 +21,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WordFinder.Core\WordFinder.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="nupkg\" />
   </ItemGroup>
 
 </Project>

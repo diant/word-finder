@@ -6,7 +6,7 @@ namespace WordFinder.Core.UnitTests
         public void WordsFileIsReadSuccess()
         {
             var words = WordsReader.GetWords();
-            var list = WordFinder.Find("zerobat");
+            var list = WordFinder.Find("zerobat", true);
             Assert.True(words.Any());
         }
     }

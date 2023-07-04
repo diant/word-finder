@@ -21,14 +21,13 @@ namespace WordFinder.CLI.Commands
         public string Letters { get; set; } = string.Empty;
 
         [Option(
-            Description = "Groups the results by word length",
+            Description = "Groups the results by word length (Default `true`)",
             ShortName = "g",
             LongName = "grouped",
             ShowInHelpText = true,
-            Inherited = true,
-            ValueName = "GROUPED"
+            Inherited = true
         )]
-        public bool Grouped { get; set; } = false;
+        public bool Grouped { get; set; } = true;
 
         public Task<int> OnExecute(CommandLineApplication app) => _mediator.Send(new MainCmdRequest(app, Letters, Grouped));
 
