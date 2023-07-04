@@ -13,7 +13,7 @@ public class MainCmdRequestValidator : AbstractValidator<MainCmdRequest>
             .WithMessage($"Letters must be maximum {MaxLettersLength} characters");
         RuleFor(x => x.Letters)
             .Matches(@"^[a-zA-Z]+$")
-            .WithMessage("PArameter must contain only letters");
+            .WithMessage("Parameter must contain only letters");
         //RuleFor(x => x.Letters)
         //    .Matches(@"^[a-zA-Z\*]+$")
         //    .WithMessage("Letters must contain only letters and wildcard `*`");

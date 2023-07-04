@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System.Diagnostics;
 
 namespace WordFinder.Api.Middlewares;
 
@@ -14,9 +15,17 @@ internal class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("{Request}/{Value}", request.GetType().Name, request);
+        _logger.LogInformation("{Message}/{Request}/{Value}", 
+            "Handling request", request.GetType().Name, request);
+
+        Stopwatch sw = new();
+        sw.Start();
         var r = await next();
-        _logger.LogInformation("{Request}", request.GetType().Name);
+        sw.Stop();
+
+        _logger.LogInformation("{Message}/{Request}",
+            $"Request handled in {sw.ElapsedMilliseconds}ms", request.GetType().Name);
+
         return r;
     }
 }

@@ -27,27 +27,39 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
         {
             return 0;
         }
-        
+
+        //_console.BackgroundColor = ConsoleColor.DarkCyan;
+        _console.ForegroundColor = ConsoleColor.Gray;
         _console.WriteLine("WordFinder CLI tool\nFind all possible words for given letters");
         _console.WriteLine($"Letters: `{request.Letters}`\tGrouped: `{request.Grouped}`");
+        _console.ResetColor();
+
         var wordGroups = await Core.WordFinder.Find(request.Letters, request.Grouped);
         if (request.Grouped)
         {
             foreach (var group in wordGroups.OrderByDescending(x => x.Key))
-            {
+            {   
+                _console.BackgroundColor = ConsoleColor.DarkYellow;
+                _console.ForegroundColor = ConsoleColor.Black;
                 _console.WriteLine($"\n{group.Key} letters");
-                _console.WriteLine("--------------------");
+                _console.ResetColor();
+
+                _console.ForegroundColor = ConsoleColor.DarkYellow;
+                //_console.WriteLine("--------------------");
                 _console.WriteLine(string.Join(", ", group.Value));
+                _console.ResetColor();
             }
         }
         else
         {
-            foreach(var word in wordGroups.Select(x => x.Value))
+            _console.ForegroundColor = ConsoleColor.DarkYellow;
+            foreach(var word in wordGroups.Select(x => x.Value).OrderByDescending(x => x.Length))
             {
                 _console.WriteLine(string.Join(", ", word));
             }
         }
 
+        _console.ResetColor();
         return 0;
     }
 

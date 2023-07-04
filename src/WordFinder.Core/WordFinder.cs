@@ -2,7 +2,7 @@
 
 public static class WordFinder
 {
-    public static async Task<Dictionary<int,string[]>> Find(string letters, bool grouped)
+    public static async Task<Dictionary<int,string[]>> Find(string letters, bool grouped = true)
     {
         var words = await WordsReader.GetWords();
         var finalResult = FindWords(words, letters);

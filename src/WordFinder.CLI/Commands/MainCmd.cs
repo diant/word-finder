@@ -28,15 +28,15 @@ namespace WordFinder.CLI.Commands
         public string Letters { get; set; } = string.Empty;
 
         [Option(
-            Description = "Groups the results by word length (Default `true`)",
-            ShortName = "g",
-            LongName = "grouped",
+            Description = "Shows the result without grouping by word length",
+            ShortName = "ng",
+            LongName = "no-group",
             ShowInHelpText = true,
             Inherited = true
         )]
-        public bool Grouped { get; set; } = true;
+        public bool NoGroup { get; set; } = false;
 
-        public Task<int> OnExecute(CommandLineApplication app) => _mediator.Send(new MainCmdRequest(app, Letters, Grouped));
+        public Task<int> OnExecute(CommandLineApplication app) => _mediator.Send(new MainCmdRequest(app, Letters, !NoGroup));
 
         private static string GetVersion() => typeof(MainCmd).Assembly.GetName().Version!.ToString();
     }
