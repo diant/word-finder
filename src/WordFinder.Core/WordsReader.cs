@@ -4,9 +4,10 @@ namespace WordFinder.Core;
 
 public static class WordsReader
 {
-    private static IEnumerable<string> _words = new List<string>();
+    private const string ResourceName = "WordFinder.Core.words_alpha.txt";
+    private static IReadOnlyCollection<string> _words = new List<string>();
 
-    public static IEnumerable<string> GetWords()
+    public static async Task<IReadOnlyCollection<string>> GetWords()
     {
         if (_words.Any())
         {
@@ -14,12 +15,11 @@ public static class WordsReader
         }
 
         var assembly = Assembly.GetExecutingAssembly();
-        var resourceName = "WordFinder.Core.words_alpha.txt";
         string result = string.Empty;
-        using (var stream = assembly.GetManifestResourceStream(resourceName))
+        using (var stream = assembly.GetManifestResourceStream(ResourceName))
         using (var reader = new StreamReader(stream!))
         {
-            result = reader.ReadToEnd();
+            result = await reader.ReadToEndAsync();
         }
         _words = result.Split('\n', StringSplitOptions.TrimEntries).Where(x => x.Length >= 2).ToList();
         return _words;

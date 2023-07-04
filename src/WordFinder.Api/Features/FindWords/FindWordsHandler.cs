@@ -6,7 +6,7 @@ internal sealed class FindWordsHandler : IRequestHandler<FindWordsRequest, FindW
 {
     public async Task<FindWordsResponse> Handle(FindWordsRequest request, CancellationToken cancellationToken)
     {
-        var words = WordFinder.Core.WordFinder.Find(request.Letters, request.Grouped);
+        var words = await Core.WordFinder.Find(request.Letters, request.Grouped);
         return new FindWordsResponse(words.SelectMany(x => x.Value).ToList());
     }
 }

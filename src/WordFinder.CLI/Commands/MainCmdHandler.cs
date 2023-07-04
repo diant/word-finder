@@ -15,22 +15,22 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
         this.validator = validator;
     }
 
-    public Task<int> Handle(MainCmdRequest request, CancellationToken cancellationToken)
+    public async Task<int> Handle(MainCmdRequest request, CancellationToken cancellationToken)
     {
         if (!request.Letters.Any())
         {
             request.App.ShowHelp();
-            return Task.FromResult(0);
+            return 0;
         }
 
         if(!ValidateRequest(request))
         {
-            return Task.FromResult(0);
+            return 0;
         }
         
         _console.WriteLine("WordFinder CLI tool\nFind all possible words for given letters");
         _console.WriteLine($"Letters: `{request.Letters}`\tGrouped: `{request.Grouped}`");
-        var wordGroups = Core.WordFinder.Find(request.Letters, request.Grouped);
+        var wordGroups = await Core.WordFinder.Find(request.Letters, request.Grouped);
         if (request.Grouped)
         {
             foreach (var group in wordGroups.OrderByDescending(x => x.Key))
@@ -48,7 +48,7 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
             }
         }
 
-        return Task.FromResult(0);
+        return 0;
     }
 
     private bool ValidateRequest(MainCmdRequest request)

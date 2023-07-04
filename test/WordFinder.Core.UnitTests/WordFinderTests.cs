@@ -3,9 +3,9 @@ namespace WordFinder.Core.UnitTests
     public class WordFinderTests
     {
         [Fact]
-        public void WordsFileIsReadSuccess()
+        public async Task WordsFileIsReadSuccess()
         {
-            var words = WordsReader.GetWords();
+            var words = await WordsReader.GetWords();
             Assert.True(words.Any());
         }       
     }

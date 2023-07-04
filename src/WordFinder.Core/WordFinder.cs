@@ -2,9 +2,9 @@
 
 public static class WordFinder
 {
-    public static Dictionary<int,string[]> Find(string letters, bool grouped)
+    public static async Task<Dictionary<int,string[]>> Find(string letters, bool grouped)
     {
-        var words = WordsReader.GetWords();
+        var words = await WordsReader.GetWords();
         var finalResult = FindWords(words, letters);
 
         if (grouped)
@@ -17,10 +17,9 @@ public static class WordFinder
     private static Dictionary<int, string[]> GroupwordsByLength(IEnumerable<string> words)
     {
         return words.GroupBy(w => w.Length).ToDictionary(g => g.Key, g => g.Select(g => string.Join(", ", g)).ToArray());
-    }   
+    }
 
-
-    private static List<string> FindWords(IEnumerable<string> words, string letters)
+    private static List<string> FindWords(IReadOnlyCollection<string> words, string letters)
     {
         List<string> result = new();
         foreach (string word in words)
