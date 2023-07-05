@@ -5,6 +5,7 @@ namespace WordFinder.CLI.Commands;
 public class MainCmdRequestValidator : AbstractValidator<MainCmdRequest>
 {
     private const int MaxLettersLength = 8;
+    private readonly char[] GroupByAllowedValues = new char[] { 'l', 'p', 'n' };
 
     public MainCmdRequestValidator()
     {
@@ -13,7 +14,10 @@ public class MainCmdRequestValidator : AbstractValidator<MainCmdRequest>
             .WithMessage($"Letters must be maximum {MaxLettersLength} characters");
         RuleFor(x => x.Letters)
             .Matches(@"^[a-zA-Z]+$")
-            .WithMessage("Parameter must contain only letters");
+            .WithMessage("Letters must contain only characters");
+        RuleFor(x => x.GroupBy)
+            .Must(x => GroupByAllowedValues.Contains(x))
+            .WithMessage("GroupBy must be one of the following: l (length) | p (points) | n (no grouping)");
         //RuleFor(x => x.Letters)
         //    .Matches(@"^[a-zA-Z\*]+$")
         //    .WithMessage("Letters must contain only letters and wildcard `*`");

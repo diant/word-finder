@@ -28,13 +28,14 @@ namespace WordFinder.CLI.Commands
         public string Letters { get; set; } = string.Empty;
 
         [Option(
-            Description = "Shows the result without grouping by word length",
-            ShortName = "ng",
-            LongName = "no-group",
+            Description = "Groups results by word length (default), points or no grouping",
+            ShortName = "g",
+            LongName = "group",
+            ValueName = "l (length) | p (points) | n (no grouping)",
             ShowInHelpText = true,
             Inherited = true
         )]
-        public bool NoGroup { get; set; } = false;
+        public char Group { get; set; } = GroupBy.Length;
 
         [Option(            
         Description = "Shows only words that contain the given string",
@@ -46,8 +47,17 @@ namespace WordFinder.CLI.Commands
                    )]
         public string Contains { get; set; } = default;
 
-        public Task<int> OnExecute(CommandLineApplication app) => _mediator.Send(new MainCmdRequest(app, Letters, !NoGroup, Contains));
+        public Task<int> OnExecute(CommandLineApplication app) => _mediator.Send(new MainCmdRequest(app, Letters, Group, Contains));
 
         private static string GetVersion() => typeof(MainCmd).Assembly.GetName().Version!.ToString();
+    }
+
+    public class GroupBy
+    {
+        public static readonly char Length = 'l';
+        public static readonly char Points = 'p';
+        public static readonly char None = 'n';
+
+        public override string ToString() => "l (length) | p (points) | n (no grouping)";
     }
 }

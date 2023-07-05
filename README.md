@@ -19,7 +19,7 @@ Once installed, update with `dotnet tool update -g --add-source .\nupkg wfind`
 ### Usage
 
 - `wfind -l <letters>`
-- `wfind -l <letters> -g` to get groupped results by word length (True by default)
+- `wfind -l <letters> -g` to get grouped results by word length (True by default)
 
 Type `wfind` or `wfind --help` for more information
 

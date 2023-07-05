@@ -1,0 +1,1 @@
+﻿dotnet tool unistall -g --add-source ..\nupkg wfind

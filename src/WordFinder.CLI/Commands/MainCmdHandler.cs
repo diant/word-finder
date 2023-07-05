@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
+using WordFinder.Core;
 
 namespace WordFinder.CLI.Commands;
 
@@ -28,39 +29,42 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
             return 0;
         }
 
-        //_console.BackgroundColor = ConsoleColor.DarkCyan;
+        var grp = request.GroupBy == GroupBy.Length ? "letters" : request.GroupBy == 'p' ? "points" : "no grouping";
         _console.ForegroundColor = ConsoleColor.Gray;
-        //_console.WriteLine("WordFinder CLI tool\nFind all possible words for given letters");
-        _console.WriteLine($"Letters: `{request.Letters}`\tGrouped: `{request.Grouped}`");
+        _console.Write($"Letters: `{request.Letters}`\tGroup: `{grp}`");
         if (!string.IsNullOrWhiteSpace(request.Contains))
         {
-            _console.WriteLine($"Contains: `{request.Contains}`");
+            _console.Write($"\nContains: `{request.Contains}`");
         }
         _console.ResetColor();
+        _console.WriteLine();
 
-        var wordGroups = await Core.WordFinder.Find(request.Letters, request.Grouped, request.Contains);
-        if (request.Grouped)
+        var wordsFound = await Core.WordFinder.Find(request.Letters, request.Contains);
+        if (request.GroupBy != GroupBy.None)
         {
-            foreach (var group in wordGroups.OrderByDescending(x => x.Key))
+            Func<Word, int> groupBy = request.GroupBy switch
+            {
+                'p' => x => x.Points,
+                'l' => x => x.Length,
+                _ => throw new NotImplementedException(),
+            };
+
+            foreach (var group in wordsFound.GroupBy(groupBy).OrderByDescending(x => x.Key))
             {   
                 _console.BackgroundColor = ConsoleColor.DarkYellow;
                 _console.ForegroundColor = ConsoleColor.Black;
-                _console.WriteLine($"\n{group.Key} letters");
+                _console.WriteLine($"\n{group.Key} {grp}");
                 _console.ResetColor();
 
                 _console.ForegroundColor = ConsoleColor.DarkYellow;
-                //_console.WriteLine("--------------------");
-                _console.WriteLine(string.Join(", ", group.Value));
+                _console.WriteLine(string.Join(", ", group));
                 _console.ResetColor();
             }
         }
         else
         {
             _console.ForegroundColor = ConsoleColor.DarkYellow;
-            foreach(var word in wordGroups.Select(x => x.Value).OrderByDescending(x => x.Length))
-            {
-                _console.WriteLine(string.Join(", ", word));
-            }
+            _console.WriteLine(string.Join(", ", wordsFound.OrderByDescending(x => x.Length).Select(x => x.Value)));
         }
 
         _console.ResetColor();
@@ -78,7 +82,8 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
                 _console.WriteLine(error.ErrorMessage);
             }
             _console.ResetColor();
-            _console.WriteLine($"\nPlease try again");
+            request.App.ShowHint();
+
             return false;
         }
 
