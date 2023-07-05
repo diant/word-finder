@@ -1,6 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace WordFinder.Api.Features.FindWords;
 
-public record FindWordsRequest(string Letters) : IRequest<FindWordsResponse>;
+public record FindWordsRequest(string Letters, string? Contains = default) : IRequest<FindWordsResponse>;

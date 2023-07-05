@@ -12,15 +12,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFinder.CLI", "WordFinder.CLI\WordFinder.CLI.csproj", "{624DCD72-34F1-4221-8BE6-BD35DCA976E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordFinder.CLI", "WordFinder.CLI\WordFinder.CLI.csproj", "{624DCD72-34F1-4221-8BE6-BD35DCA976E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFinder.CLI.UnitTests", "..\test\WordFinder.CLI.UnitTests\WordFinder.CLI.UnitTests.csproj", "{590212AC-6F95-4413-BFFD-27D873C928A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordFinder.CLI.UnitTests", "..\test\WordFinder.CLI.UnitTests\WordFinder.CLI.UnitTests.csproj", "{590212AC-6F95-4413-BFFD-27D873C928A5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{27006F85-F94D-462B-B036-A54B0F8BA7AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFinder.Core.UnitTests", "..\test\WordFinder.Core.UnitTests\WordFinder.Core.UnitTests.csproj", "{E142BD53-D7E9-47A6-BC58-E4AE0E665F66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordFinder.Core.UnitTests", "..\test\WordFinder.Core.UnitTests\WordFinder.Core.UnitTests.csproj", "{E142BD53-D7E9-47A6-BC58-E4AE0E665F66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFinder.Api", "WordFinder.Api\WordFinder.Api.csproj", "{E1C05F18-A169-47BD-8AE4-194A49D2C5B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordFinder.Api", "WordFinder.Api\WordFinder.Api.csproj", "{E1C05F18-A169-47BD-8AE4-194A49D2C5B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFinder.Web", "WordFinder.Web\WordFinder.Web.csproj", "{B582DAC9-BAB5-4477-8DC4-21E5DF2CD713}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,10 @@ Global
 		{E1C05F18-A169-47BD-8AE4-194A49D2C5B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1C05F18-A169-47BD-8AE4-194A49D2C5B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1C05F18-A169-47BD-8AE4-194A49D2C5B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B582DAC9-BAB5-4477-8DC4-21E5DF2CD713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B582DAC9-BAB5-4477-8DC4-21E5DF2CD713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B582DAC9-BAB5-4477-8DC4-21E5DF2CD713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B582DAC9-BAB5-4477-8DC4-21E5DF2CD713}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace WordFinder.Core;
+﻿namespace WordFinder.Core;
 
 public static class WordFinder
 {
@@ -24,7 +22,7 @@ public static class WordFinder
             bool found = true;
             foreach (char c in word.Value)
             {
-                int index = temp.IndexOf(c);
+                int index = temp.IndexOf(c, StringComparison.InvariantCultureIgnoreCase);
                 if (index == -1)
                 {
                     found = false;

@@ -1,3 +1,4 @@
+using WordFinder.Api.DependencyInjection;
 using WordFinder.Api.Features.FindWords;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapWordFinderEndpoints();
+app.MapFindWords();
 
 app.Run();

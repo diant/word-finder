@@ -66,7 +66,7 @@ public static class WordsReader
         Func<string, bool> filter = x => x.Length >= 2;
         if (!string.IsNullOrWhiteSpace(contains))
         {
-            filter = x => x.Length >= 2 && x.Contains(contains);
+            filter = x => x.Length >= 2 && x.Contains(contains, StringComparison.InvariantCultureIgnoreCase);
         }
 
         _words = result

@@ -397,3 +397,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /src/.idea/.idea.WordFinder/.idea
+/src/WordFinder.Web/ClientApp/.angular/cache/15.1.6
+/src/WordFinder.Web/ClientApp/.vscode
