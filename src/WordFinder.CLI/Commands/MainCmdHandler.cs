@@ -24,7 +24,7 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
             return 0;
         }
 
-        if(!ValidateRequest(request))
+        if (!ValidateRequest(request))
         {
             return 0;
         }

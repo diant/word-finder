@@ -7,7 +7,9 @@ public static class WordFinder
         string? contains = default)
     {
         var words = await WordsReader.GetWords(contains);
-        var result = FindWords(words, letters);
+        var result = letters.Contains('*') ?
+            FindWordsWithWildCard(words, letters) :
+            FindWords(words, letters);
 
         return result;
     }
@@ -15,14 +17,14 @@ public static class WordFinder
     private static IReadOnlyCollection<Word> FindWords(IEnumerable<Word> words, string letters)
     {
         List<Word> result = new();
-        foreach (var word in words)
+
+        foreach (var word in words.Where(w => w.Length >= 2))
         {
-            if (word.Length < 2) continue;
-            string temp = letters;
-            bool found = true;
-            foreach (char c in word.Value)
+            var temp = letters;
+            var found = true;
+            foreach (var c in word.Value)
             {
-                int index = temp.IndexOf(c, StringComparison.InvariantCultureIgnoreCase);
+                var index = temp.IndexOf(c, StringComparison.InvariantCultureIgnoreCase);
                 if (index == -1)
                 {
                     found = false;
@@ -30,10 +32,67 @@ public static class WordFinder
                 }
                 temp = temp.Remove(index, 1);
             }
-            if (found) result.Add(word);
+            if (found)
+            {
+                result.Add(word);
+            }
         }
+
         return result;
     }
 
+    private static IReadOnlyCollection<Word> FindWordsWithWildCard(IEnumerable<Word> words, string letters)
+    {
+        var result = new List<Word>();
+        var wildcardCount = letters.Count(c => c == '*');
+        var letterCounts = letters.Where(c => c != '*').GroupBy(c => c).ToDictionary(g => g.Key, g => g.Count());
+
+        foreach (var word in words)
+        {
+            var wordLetterCounts = word.Value.GroupBy(c => c).ToDictionary(g => g.Key, g => g.Count());
+            bool isMatch = true;
+            int wildcardsUsed = 0;
+
+            foreach (var kvp in wordLetterCounts)
+            {
+                if (letterCounts.ContainsKey(kvp.Key))
+                {
+                    if (kvp.Value > letterCounts[kvp.Key])
+                    {
+                        int difference = kvp.Value - letterCounts[kvp.Key];
+                        wildcardsUsed += difference;
+                        if (wildcardsUsed > wildcardCount)
+                        {
+                            isMatch = false;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    wildcardsUsed += kvp.Value;
+                    if (wildcardsUsed > wildcardCount)
+                    {
+                        isMatch = false;
+                        break;
+                    }
+                    word.Wildchar = kvp.Key;
+                }
+            }
+
+            if (isMatch)
+            {
+                var points = word.Value.ToUpperInvariant().Sum(c => WordsReader.LetterPoints[c]);
+                if(word.Wildchar is not null)
+                {
+                    points -= WordsReader.LetterPoints[word.Wildchar.Value];
+                }
+                word.UpdatePoints(points);
+                result.Add(word);
+            }
+        }
+
+        return result;
+    }
 }
 

@@ -15,8 +15,9 @@ public static class WordsReader
     //5 Points - K.
     //8 Points - J and X.
     //10 Points - Q and Z.
-    private readonly static Dictionary<char, int> LetterPoints = new()
+    internal readonly static Dictionary<char, int> LetterPoints = new()
     {
+        { '*', 0 },
         { 'A', 1 },
         { 'B', 3 },
         { 'C', 3 },
@@ -42,7 +43,33 @@ public static class WordsReader
         { 'W', 4 },
         { 'X', 8 },
         { 'Y', 4 },
-        { 'Z', 10 }
+        { 'Z', 10 },
+        { 'a', 1 },
+        { 'b', 3 },
+        { 'c', 3 },
+        { 'd', 2 },
+        { 'e', 1 },
+        { 'f', 4 },
+        { 'g', 2 },
+        { 'h', 4 },
+        { 'i', 1 },
+        { 'j', 8 },
+        { 'k', 5 },
+        { 'l', 1 },
+        { 'm', 3 },
+        { 'n', 1 },
+        { 'o', 1 },
+        { 'p', 3 },
+        { 'q', 10 },
+        { 'r', 1 },
+        { 's', 1 },
+        { 't', 1 },
+        { 'u', 1 },
+        { 'v', 4 },
+        { 'w', 4 },
+        { 'x', 8 },
+        { 'y', 4 },
+        { 'z', 10 }
     };
 
     private const string ResourceName = "WordFinder.Core.sowpods.txt";
@@ -72,7 +99,7 @@ public static class WordsReader
         _words = result
             .Split('\n', StringSplitOptions.TrimEntries)
             .Where(filter)
-            .Select(x => new Word(x.ToLower(), x.Length, x.Sum(c => LetterPoints[c])))
+            .Select(x => new Word(x.ToLower(), x.Length))
             .ToList();
 
         return _words;
