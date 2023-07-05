@@ -15,7 +15,7 @@ namespace WordFinder.CLI.UnitTests
         [InlineData("aaaaaaaa")]
         public void LettersContainMax8CharactersValidationSuccess(string letters)
         {
-            var request = new MainCmdRequest(default, letters, default, default);
+            var request = new MainCmdRequest(default, letters, 'l', default);
             MainCmdRequestValidator validator = new();
             var result = validator.Validate(request);
             Assert.True(result.IsValid);
