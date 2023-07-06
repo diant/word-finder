@@ -34,6 +34,8 @@ public static class WordFinder
             }
             if (found)
             {
+                var points = word.Value.ToUpperInvariant().Sum(c => WordsReader.LetterPoints[c]);
+                word.UpdatePoints(points);
                 result.Add(word);
             }
         }
@@ -83,7 +85,7 @@ public static class WordFinder
             if (isMatch)
             {
                 var points = word.Value.ToUpperInvariant().Sum(c => WordsReader.LetterPoints[c]);
-                if(word.Wildchar is not null)
+                if (word.Wildchar != null)
                 {
                     points -= WordsReader.LetterPoints[word.Wildchar.Value];
                 }

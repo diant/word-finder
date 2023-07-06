@@ -9,9 +9,9 @@ namespace WordFinder.Web.Controllers
         private readonly string[] someWords = new string[] { "Hello", "World", "Foo", "Bar" };
 
         [HttpGet]
-        public IActionResult Get()
+        public string[] Get()
         {
-            return Ok(someWords);
+            return someWords;
         }
     }
 }
