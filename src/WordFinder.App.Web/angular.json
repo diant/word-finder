@@ -67,7 +67,8 @@
               "browserTarget": "WordFinder.App.Web:build:production"
             },
             "development": {
-              "browserTarget": "WordFinder.App.Web:build:development"
+              "browserTarget": "WordFinder.App.Web:build:development",
+              "proxyConfig": "proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"

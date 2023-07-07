@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { WordsComponent } from './words/words.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [			
@@ -18,7 +19,8 @@ import { WordsComponent } from './words/words.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
