@@ -12,10 +12,7 @@ public static class MapEndpointsExtension
             async ([FromServices] IMediator mediator, string letters) => await mediator.Send(new FindWordsRequest(letters)))
         .WithName("Wordfinder")
         .AllowAnonymous()
-        //.Accepts<string>("letters")        
         .Produces<FindWordsResponse>()
-        //.Produces(StatusCodes.Status200OK)
-        //.Produces(StatusCodes.Status400BadRequest)
         .WithOpenApi();
 
         return app;

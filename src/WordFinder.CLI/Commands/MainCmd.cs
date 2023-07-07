@@ -1,5 +1,6 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 using MediatR;
+using WordFinder.CLI.Commands.Interactive;
 
 namespace WordFinder.CLI.Commands
 {
@@ -12,13 +13,15 @@ namespace WordFinder.CLI.Commands
 "
     )]
     [VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]
+    [HelpOption("-? | -h | --help")]
+    [Subcommand(typeof(InteractiveCmd))]
     internal sealed class MainCmd
     {
         private readonly IMediator _mediator;
         public MainCmd(IMediator mediator) => _mediator = mediator;
 
         [Option(
-            Description = "Input letters (max 8)",
+            Description = "Input letters (max 8). Use `*` for wildcard (max 1)",
             ShortName = "l",
             LongName = "letters",
             ShowInHelpText = true,
