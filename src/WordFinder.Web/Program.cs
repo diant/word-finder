@@ -17,6 +17,13 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.MapGet("/words",
+        (string letters) => new string[] { "value1", "value2" })
+    .WithName("words")
+    .AllowAnonymous()
+    .Produces<string[]>();
+    //.Produces(StatusCodes.Status200OK)
+    //.Produces(StatusCodes.Status400BadRequest)
 
 app.MapControllerRoute(
     name: "default",

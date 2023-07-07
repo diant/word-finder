@@ -8,7 +8,7 @@ public static class MapEndpointsExtension
 {
     public static WebApplication MapFindWords(this WebApplication app)
     {
-        app.MapGet("/wordfinder", 
+        app.MapGet("/api/wordfinder/{letters}", 
             async ([FromServices] IMediator mediator, string letters) => await mediator.Send(new FindWordsRequest(letters)))
         .WithName("Wordfinder")
         .AllowAnonymous()
