@@ -13,9 +13,9 @@ namespace WordFinder.Api.DependencyInjection
             services.AddMediatR(configuration =>
             {
                 configuration.RegisterServicesFromAssemblyContaining<Program>();
+                configuration.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+                configuration.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             return services;
         }
