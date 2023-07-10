@@ -1,5 +1,4 @@
 using WordFinder.Api.DependencyInjection;
-using WordFinder.Api.Features.FindWords;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +7,7 @@ const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(); 
 builder.Services.AddCors(options =>
 {
@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
-
-app.MapFindWords();
+app.MapControllers();
+//app.MapFindWords();
 
 app.Run();
