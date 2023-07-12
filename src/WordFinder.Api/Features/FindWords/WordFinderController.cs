@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WordFinder.Api.Features.FindWords;
 
-public record FindWordsOptions(string Letters);
-
 [ApiController]
 [Route("api/[controller]")]
 public sealed class WordFinderController : ControllerBase

@@ -4,7 +4,7 @@ namespace WordFinder.CLI.Commands;
 
 public class MainCmdRequestValidator : AbstractValidator<MainCmdRequest>
 {
-    private const int MaxLettersLength = 8;
+    private const int MaxLettersLength = 10;
     private readonly char[] GroupByAllowedValues = new char[] { 'l', 'p', 'n' };
     private const string LettersOnlyRegex = @"^[a-zA-Z]+$";
     private const string LettersWithWildcardRegex = @"^[a-zA-Z\*]+$";

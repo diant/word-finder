@@ -22,6 +22,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddWordFinder();
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 var app = builder.Build();
 

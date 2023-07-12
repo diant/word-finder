@@ -7,7 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["WordFinder.Api/WordFinder.Api.csproj", "WordFinder.Api/"]
+#"C:\dev\word-finder\src\WordFinder.Api\WordFinder.Api.csproj"
+COPY "WordFinder.Api/WordFinder.Api.csproj" "WordFinder.Api/"
+COPY "WordFinder.Core/WordFinder.Core.csproj" "WordFinder.Core/"
 RUN dotnet restore "WordFinder.Api/WordFinder.Api.csproj"
 COPY . .
 WORKDIR "/src/WordFinder.Api"

@@ -69,6 +69,7 @@ public static class WordFinder
                             break;
                         }
                     }
+                    //word.Wildchar = kvp.Key;
                 }
                 else
                 {

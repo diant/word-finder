@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq.Expressions;
+using System.Reflection;
 
 namespace WordFinder.Core;
 
@@ -75,7 +76,10 @@ public static class WordsReader
     private const string ResourceName = "WordFinder.Core.sowpods.txt";
     private static IReadOnlyCollection<Word> _words = new List<Word>();
 
-    public static async Task<IReadOnlyCollection<Word>> GetWords(string? contains = default)
+    public static async Task<IReadOnlyCollection<Word>> GetWords(
+        string? contains = default, 
+        string? startsWith = default, 
+        string? endsWith = default)
     {
         if (_words.Any())
         {
@@ -90,10 +94,19 @@ public static class WordsReader
             result = await reader.ReadToEndAsync();
         }
 
+        //var r = filter || true;
         Func<string, bool> filter = x => x.Length >= 2;
         if (!string.IsNullOrWhiteSpace(contains))
         {
             filter = x => x.Length >= 2 && x.Contains(contains, StringComparison.InvariantCultureIgnoreCase);
+        }
+        else if (!string.IsNullOrWhiteSpace(startsWith))
+        {
+            filter = x => x.Length >= 2 && x.StartsWith(startsWith, StringComparison.InvariantCultureIgnoreCase);
+        }
+        else if (!string.IsNullOrWhiteSpace(endsWith))
+        {
+            filter = x => x.Length >= 2 && x.EndsWith(endsWith, StringComparison.InvariantCultureIgnoreCase);
         }
 
         _words = result
