@@ -50,7 +50,28 @@ namespace WordFinder.CLI.Commands
                    )]
         public string Contains { get; set; } = default;
 
-        public Task<int> OnExecute(CommandLineApplication app) => _mediator.Send(new MainCmdRequest(app, Letters, Group, Contains));
+        [Option(
+        Description = "Shows only words that start with the given string",
+                       ShortName = "s",
+                       LongName = "starts-with",
+                       ShowInHelpText = true,
+                       Inherited = true,
+                       ValueName = "SUBSTRING"
+                   )]
+        public string StartsWith { get; set; } = default;
+
+        [Option(
+        Description = "Shows only words that end with the given string",
+                       ShortName = "e",
+                       LongName = "ends-with",
+                       ShowInHelpText = true,
+                       Inherited = true,
+                       ValueName = "SUBSTRING"
+                   )]
+        public string EndsWith { get; set; } = default;
+
+        public Task<int> OnExecute(CommandLineApplication app) => 
+            _mediator.Send(new MainCmdRequest(app, Letters, Group, Contains, StartsWith, EndsWith));
 
         private static string GetVersion() => typeof(MainCmd).Assembly.GetName().Version!.ToString();
     }

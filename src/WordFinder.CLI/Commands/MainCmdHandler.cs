@@ -39,7 +39,7 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
         _console.ResetColor();
         _console.WriteLine();
 
-        var wordsFound = await Core.WordFinder.Find(request.Letters, request.Contains);
+        var wordsFound = await Core.WordFinder.Find(request.Letters, request.Contains, request.StartsWith, request.EndsWith);
         if (request.GroupBy != GroupBy.None)
         {
             Func<Word, int> groupBy = request.GroupBy switch

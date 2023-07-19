@@ -4,9 +4,11 @@ public static class WordFinder
 {
     public static async Task<IReadOnlyCollection<Word>> Find(
         string letters, 
-        string? contains = default)
+        string? contains = default,
+        string? startsWith = default,
+        string? endsWith = default)
     {
-        var words = await WordsReader.GetWords(contains);
+        var words = await WordsReader.GetWords(contains, startsWith, endsWith);
         var result = letters.Contains('*') ?
             FindWordsWithWildCard(words, letters) :
             FindWords(words, letters);

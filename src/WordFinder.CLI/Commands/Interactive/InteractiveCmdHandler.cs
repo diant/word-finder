@@ -33,7 +33,7 @@ namespace WordFinder.CLI.Commands.Interactive
                     return 0;
                 }
 
-                await _mediator.Send(new MainCmdRequest(request.App, letters, GroupBy.Length, default));
+                await _mediator.Send(new MainCmdRequest(request.App, letters, GroupBy.Length, default, default, default));
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace WordFinder.Core;
 
@@ -86,35 +85,48 @@ public static class WordsReader
             return _words;
         }
 
-        var assembly = Assembly.GetExecutingAssembly();
+        string result = await LoadWordsFromFile();
+
+        //var r = filter || true;
+        Func<string, bool> defaultFilter = x => x.Length >= 2;
+        Func<string, bool> containsFilter = x => true;
+        Func<string, bool> startsWithFilter = x => true;
+        Func<string, bool> endsWithFilter = x => true;
+
+        if (!string.IsNullOrWhiteSpace(contains))
+        {
+            containsFilter = x => x.Contains(contains, StringComparison.InvariantCultureIgnoreCase);
+        }
+        if (!string.IsNullOrWhiteSpace(startsWith))
+        {
+            startsWithFilter = x => x.StartsWith(startsWith, StringComparison.InvariantCultureIgnoreCase);
+        }
+        if (!string.IsNullOrWhiteSpace(endsWith))
+        {
+            endsWithFilter = x => x.EndsWith(endsWith, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        _words = result
+            .Split('\n', StringSplitOptions.TrimEntries)
+            .Where(defaultFilter)
+            .Where(containsFilter)
+            .Where(startsWithFilter)
+            .Where(endsWithFilter)
+            .Select(x => new Word(x.ToLower(), x.Length))
+            .ToList();
+
+        return _words;
+    }
+   
+    private static async Task<string> LoadWordsFromFile()
+    {
         string result = string.Empty;
-        using (var stream = assembly.GetManifestResourceStream(ResourceName))
+        using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(ResourceName))
         using (var reader = new StreamReader(stream!))
         {
             result = await reader.ReadToEndAsync();
         }
 
-        //var r = filter || true;
-        Func<string, bool> filter = x => x.Length >= 2;
-        if (!string.IsNullOrWhiteSpace(contains))
-        {
-            filter = x => x.Length >= 2 && x.Contains(contains, StringComparison.InvariantCultureIgnoreCase);
-        }
-        else if (!string.IsNullOrWhiteSpace(startsWith))
-        {
-            filter = x => x.Length >= 2 && x.StartsWith(startsWith, StringComparison.InvariantCultureIgnoreCase);
-        }
-        else if (!string.IsNullOrWhiteSpace(endsWith))
-        {
-            filter = x => x.Length >= 2 && x.EndsWith(endsWith, StringComparison.InvariantCultureIgnoreCase);
-        }
-
-        _words = result
-            .Split('\n', StringSplitOptions.TrimEntries)
-            .Where(filter)
-            .Select(x => new Word(x.ToLower(), x.Length))
-            .ToList();
-
-        return _words;
+        return result;
     }
 }
