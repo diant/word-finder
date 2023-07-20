@@ -1,0 +1,19 @@
+﻿@model WordFinder.Web.Models.WordViewModel
+@{    
+    ViewData["Title"] = "Home Page";
+}
+<form asp-controller="Home" asp-action="Index">
+    <p>
+        Letters: <input type="text" name="Letters" />
+        <input type="submit" value="Search" />
+    </p>
+    @{
+        if (Model != null)
+        {
+            foreach (var word in Model.Words)
+            {
+                <p>@word</p>
+            }
+        }
+    }
+</form>
