@@ -9,3 +9,7 @@ export class WordGroup {
     group!: string;
     words!: string[];
 }
+
+export class WordRequest {
+    letters!: string;
+}

@@ -2,4 +2,9 @@
 
 namespace WordFinder.Api.Features.FindWords;
 
-public record FindWordsRequest(string Letters, string? Contains = default) : IRequest<FindWordsResponse>;
+public record FindWordsRequest(
+    string Letters, 
+    string? StartsWith = default,
+    string? Contains = default,
+    string? EndsWith = default
+    ) : IRequest<FindWordsResponse>;

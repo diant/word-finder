@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Word, WordGroup } from './word';
+import { Word, WordGroup, WordRequest } from './word';
 
 @Component({
   selector: 'app-words',
@@ -9,7 +9,7 @@ import { Word, WordGroup } from './word';
 })
 export class WordsComponent implements OnInit {
 
-  private _url: string = 'https://localhost:32768/api/wordfinder/';
+  private _url: string = 'https://localhost:3000/api/wordfinder/';
   
   public wordGroups: WordGroup[] = [];
   public letters: string = '';
@@ -19,8 +19,10 @@ export class WordsComponent implements OnInit {
   ngOnInit() { }
 
   public findWords() {
+    let request = new WordRequest();
+    request.letters = this.letters;
     console.log('findWords() called with letters: ' + this.letters);
-    this.http.get<Word[]>(this._url + this.letters).subscribe({
+    this.http.post<Word[]>(this._url, request).subscribe({
       next: (data: any) => {
         console.log('Data received');
         this.wordGroups = this.groupWordsByLength(data.words);
