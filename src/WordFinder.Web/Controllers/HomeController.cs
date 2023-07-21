@@ -22,7 +22,6 @@ public sealed class HomeController : Controller
         }
 
         var model = await _wordsService.FindWordsAsync(new SearchOptions(letters));
-        ViewData["Letters"] = letters;
         return View(model);
     }
 

@@ -18,6 +18,7 @@ namespace WordFinder.Web.Services
             var words = await Core.WordFinder.Find(options.Letters);
 
             return new(
+                options.Letters,
                 words.
                     GroupBy(x => x.Length)
                     .Select(x => new WordGroup(

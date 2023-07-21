@@ -23,9 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordFinder.Core.UnitTests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordFinder.Api", "WordFinder.Api\WordFinder.Api.csproj", "{E1C05F18-A169-47BD-8AE4-194A49D2C5B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFinder.Benchmarks", "WordFinder.Benchmarks\WordFinder.Benchmarks.csproj", "{6A9C7B0F-EE23-432B-8D07-0C5E1823C1BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordFinder.Benchmarks", "WordFinder.Benchmarks\WordFinder.Benchmarks.csproj", "{6A9C7B0F-EE23-432B-8D07-0C5E1823C1BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordFinder.Web", "WordFinder.Web\WordFinder.Web.csproj", "{49F91F9A-0AD5-4BBF-AA1B-42777C881F15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordFinder.Web", "WordFinder.Web\WordFinder.Web.csproj", "{49F91F9A-0AD5-4BBF-AA1B-42777C881F15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

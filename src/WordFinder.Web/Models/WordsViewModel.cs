@@ -1,6 +1,6 @@
 ﻿namespace WordFinder.Web.Models;
 
-public record WordsViewModel(IReadOnlyCollection<WordGroup> WordGroups);
+public record WordsViewModel(string? Letters, IReadOnlyCollection<WordGroup> WordGroups);
 
 public record WordGroup(string Title, Word[] Words);
 

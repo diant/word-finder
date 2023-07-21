@@ -2,21 +2,39 @@
 @{    
     ViewData["Title"] = "Home Page";
 }
-<form asp-controller="Home" asp-action="Index">
-    <p>
-        Letters: <input type="text" name="Letters" />
-        <input type="submit" value="Search" />
-    </p>
+<form asp-controller="Home" asp-action="Index" >
+    <div>
+        <p style="align-self:center">        
+            Letters: <input type="text" name="Letters" autocomplete="off" autofocus maxlength="10" min="2" placeholder="Letters" />
+            <input type="submit" value="Search" class="btn-primary" />   
+        </p>
+        <p style="font-size:x-small; color:gray; font-style:italic">Mamimum 10 characters with one wildcard `*` character</p>
+    </div>
     @{
         if (Model != null)
         {
-            <p>Words with '@ViewData["Letters"]' letters</p>
-            foreach (var grp in Model.WordGroups.OrderByDescending(x => x.Title))
-            {
-                <p>@grp.Title</p>
-                <p>@string.Join(", ", grp.Words.ToList());</p>
-                <br />
-            }
+            <p style="color:royalblue; margin-bottom:30px">
+                Words with '@Model.Letters' letters:
+            </p>
+            <table style="width:100%">
+                @foreach (var grp in Model.WordGroups.OrderByDescending(x => x.Title))
+                {
+                    <tr style="border-bottom:solid; border-color:lightgrey">
+                        <th style="background-color:ghostwhite">@grp.Title</th>
+                    </tr>
+                    <tr style="padding-bottom:100px">
+                        @foreach (var word in grp.Words.OrderBy(x => x.Value))
+                        {
+                            <td style="display:inline; margin-right:-2px">
+                                @word.Value
+                            </td>
+                            <td style="display:inline; margin-top:5px; margin-right:10px; color:rebeccapurple; font-size:x-small; font-weight:bold">
+                                @word.Points
+                            </td>
+                        }
+                    </tr>
+                }
+            </table>            
         }
     }
 </form>
