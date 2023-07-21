@@ -1,7 +1,15 @@
+//using WordFinder.Web.Filters;
+using WordFinder.Web.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(cfg =>
+{
+    //cfg.Filters.Add<LoggingActionFilter>();
+});
+builder.Services.AddLogging();
+builder.Services.AddScoped<IWordsService, WordsService>();
 
 var app = builder.Build();
 
