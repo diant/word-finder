@@ -4,10 +4,7 @@ using WordFinder.Web.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(cfg =>
-{
-    //cfg.Filters.Add<LoggingActionFilter>();
-});
+builder.Services.AddControllersWithViews();
 builder.Services.AddLogging();
 builder.Services.AddScoped<IWordsService, WordsService>();
 

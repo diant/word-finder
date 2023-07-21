@@ -20,13 +20,13 @@ Alternatively, on the folder `src\WordFinder.CLI\tools` there are 3 scripts to i
 
 ### Usage
 
-- `wfind -l <letters>` with default grouping by word length
-- `wfind -l <letters> -g <Group Option>` to get grouped results by word length (l), points (p) or no grouping (n). Default is by word length.
-- `wfind -l <letters> -c <Contains>` to get results that contains the given string.
-
 Type `wfind` or `wfind --help` for more information
 
 ## API
 
 Exports a REST API with the following endpoints:
-- `GET /api/wordfinder/{letters}` to get all words containing the given letters
+- `POST /api/wordfinder/{FindWordsOptions}` to get all words containing the given letters
+
+## WEB
+
+MVC web application
