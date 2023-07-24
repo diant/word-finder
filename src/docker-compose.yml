@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  wordfinder.web:
+    image: ${DOCKER_REGISTRY-}wordfinderweb
+    build:
+      context: .
+      dockerfile: WordFinder.Web/Dockerfile

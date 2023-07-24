@@ -73,22 +73,22 @@ public static class WordsReader
     };
 
     private const string ResourceName = "WordFinder.Core.sowpods.txt";
-    private static IReadOnlyCollection<Word> _words = new List<Word>();
+    private static IReadOnlyCollection<string> _words = new List<string>();
 
     public static async Task<IReadOnlyCollection<Word>> GetWords(
         string? contains = default, 
         string? startsWith = default, 
         string? endsWith = default)
     {
-        if (_words.Any())
+        if (!_words.Any()) 
         {
-            return _words;
+            var allWords = await LoadWordsFromFile();
+            _words = allWords
+                .Split('\n', StringSplitOptions.TrimEntries)
+                .Where(x => x.Length >= 2)
+                .ToList();
         }
 
-        string result = await LoadWordsFromFile();
-
-        //var r = filter || true;
-        Func<string, bool> defaultFilter = x => x.Length >= 2;
         Func<string, bool> containsFilter = x => true;
         Func<string, bool> startsWithFilter = x => true;
         Func<string, bool> endsWithFilter = x => true;
@@ -106,16 +106,12 @@ public static class WordsReader
             endsWithFilter = x => x.EndsWith(endsWith, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        _words = result
-            .Split('\n', StringSplitOptions.TrimEntries)
-            .Where(defaultFilter)
+        return _words
             .Where(containsFilter)
             .Where(startsWithFilter)
             .Where(endsWithFilter)
             .Select(x => new Word(x.ToLower(), x.Length))
             .ToList();
-
-        return _words;
     }
    
     private static async Task<string> LoadWordsFromFile()

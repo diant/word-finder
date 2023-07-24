@@ -2,6 +2,20 @@
 
 public static class WordFinder
 {
+    public static async Task<IReadOnlyCollection<Word>> FindWithQ(bool withU = true)
+    {
+        var words = await WordsReader.GetWords("q");
+        if (withU)
+        {
+            words = words.Where(w => w.Value.Contains('u', StringComparison.InvariantCultureIgnoreCase)).ToList();
+        }
+        else
+        {
+            words = words.Where(w => !w.Value.Contains('u', StringComparison.InvariantCultureIgnoreCase)).ToList();
+        }
+        return words;
+    }
+
     public static async Task<IReadOnlyCollection<Word>> Find(
         string letters, 
         string? contains = default,

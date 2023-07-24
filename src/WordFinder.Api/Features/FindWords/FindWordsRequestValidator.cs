@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using System.Linq;
 
 namespace WordFinder.Api.Features.FindWords;
 
@@ -21,9 +20,9 @@ public class FindWordsRequestValidator : AbstractValidator<FindWordsRequest>
         //RuleFor(x => x.GroupBy)
         //    .Must(x => GroupByAllowedValues.Contains(x))
         //    .WithMessage("GroupBy must be one of the following: l (length) | p (points) | n (no grouping)");
-        RuleFor(x => x.Contains)
-            .Matches(LettersOnlyRegex)
-            .WithMessage("Contains must contain only characters");
+        //RuleFor(x => x.Contains)
+        //    .Matches(LettersOnlyRegex)
+        //    .WithMessage("Contains must contain only characters");
         RuleFor(x => x.Letters)
             .Matches(LettersWithWildcardRegex)
             .WithMessage("Letters must contain only letters and wildcard `*`");
