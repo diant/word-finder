@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Text;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using WordFinder.Web.Models;
 using WordFinder.Web.Services;
 
