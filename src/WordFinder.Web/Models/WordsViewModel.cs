@@ -1,6 +1,14 @@
-﻿namespace WordFinder.Web.Models;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-public record WordsViewModel(string? Letters, IReadOnlyCollection<WordGroup> WordGroups);
+namespace WordFinder.Web.Models;
+
+public record WordsViewModel(
+    string? Letters, 
+    IReadOnlyCollection<WordGroup> WordGroups, 
+    int MinLen = 2, 
+    string? Contains = default, 
+    string? StartsWith = default,
+    string? EndsWith = default);
 
 public record WordGroup(string Title, Word[] Words);
 

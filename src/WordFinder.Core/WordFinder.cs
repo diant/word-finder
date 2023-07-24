@@ -6,21 +6,22 @@ public static class WordFinder
         string letters, 
         string? contains = default,
         string? startsWith = default,
-        string? endsWith = default)
+        string? endsWith = default,
+        int minLen = 2)
     {
         var words = await WordsReader.GetWords(contains, startsWith, endsWith);
         var result = letters.Contains('*') ?
-            FindWordsWithWildCard(words, letters) :
-            FindWords(words, letters);
+            FindWordsWithWildCard(words, letters, minLen) :
+            FindWords(words, letters, minLen);
 
         return result;
     }
 
-    private static IReadOnlyCollection<Word> FindWords(IEnumerable<Word> words, string letters)
+    private static IReadOnlyCollection<Word> FindWords(IEnumerable<Word> words, string letters, int minLen = 2)
     {
         List<Word> result = new();
 
-        foreach (var word in words.Where(w => w.Length >= 2))
+        foreach (var word in words.Where(x => x.Length >= minLen))
         {
             var temp = letters;
             var found = true;
@@ -45,13 +46,13 @@ public static class WordFinder
         return result;
     }
 
-    private static IReadOnlyCollection<Word> FindWordsWithWildCard(IEnumerable<Word> words, string letters)
+    private static IReadOnlyCollection<Word> FindWordsWithWildCard(IEnumerable<Word> words, string letters, int minLen = 2)
     {
         var result = new List<Word>();
         var wildcardCount = letters.Count(c => c == '*');
         var letterCounts = letters.Where(c => c != '*').GroupBy(c => c).ToDictionary(g => g.Key, g => g.Count());
 
-        foreach (var word in words)
+        foreach (var word in words.Where(x => x.Length >= minLen))
         {
             var wordLetterCounts = word.Value.GroupBy(c => c).ToDictionary(g => g.Key, g => g.Count());
             bool isMatch = true;
