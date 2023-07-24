@@ -22,7 +22,9 @@ namespace WordFinder.Web.Services
                     GroupBy(x => x.Length)
                     .Select(x => new WordGroup(
                         $"{x.Key} letters",
-                        x.Select(x => new Word(x.Value, x.Points)).OrderBy(x => x.Value).ToArray()))
+                        x.Select(x => new Word(x.Value, x.Points, $"https://www.wordreference.com/definition/{x.Value}"))
+                            .OrderBy(x => x.Value)
+                            .ToArray()))
                     .ToList(),
                 options.MinLength);
         }

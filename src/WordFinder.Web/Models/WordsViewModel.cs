@@ -12,7 +12,7 @@ public record WordsViewModel(
 
 public record WordGroup(string Title, Word[] Words);
 
-public record Word(string Value, int Points)
+public record Word(string Value, int Points, string DefinitionLink)
 {
     public override string ToString() => $"{Value}({Points})";
 }

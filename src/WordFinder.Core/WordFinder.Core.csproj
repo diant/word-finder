@@ -8,15 +8,11 @@
 
   <ItemGroup>
     <None Remove="sowpods.txt" />
-    <None Remove="words_alpha.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="sowpods.txt">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="words_alpha.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 

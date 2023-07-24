@@ -54,9 +54,10 @@
                             <div class="card-body">
                                 @foreach (var word in grp.Words.OrderBy(x => x.Value))
                                 {
-                                    <span style="display:inline; font-weight:lighter">
+                                    <a style="display:inline; font-weight:lighter; text-decoration:none; color:black" 
+                                        href=@word.DefinitionLink target="_blank">
                                         @word.Value
-                                    </span>
+                                    </a>
                                     <span class="text-primary" style="display:inline; margin-top:10em; margin-right:15px; font-size:x-small;">
                                         @word.Points
                                     </span>
