@@ -10,10 +10,7 @@ public sealed class HomeController : Controller
 {
     private readonly IWordsService _wordsService;
 
-    public HomeController(IWordsService wordsService)
-    {
-        _wordsService = wordsService;
-    }
+    public HomeController(IWordsService wordsService) => _wordsService = wordsService;
 
     public async Task<IActionResult> Index(string letters, int minLen, string contains, string startsWith, string endsWith)
     {
@@ -40,14 +37,7 @@ public sealed class HomeController : Controller
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+    public IActionResult Error() => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 
-    public IActionResult About()
-    {
-        ViewData["Data"] = "this is the about page :)";
-        return View();
-    }
+    public IActionResult About() => View();
 }
