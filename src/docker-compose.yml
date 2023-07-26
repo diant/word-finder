@@ -1,6 +1,11 @@
 version: '3.4'
 
 services:
+  wordfinder.api:
+    image: ${DOCKER_REGISTRY-}wordfinderapi
+    build:
+      context: .
+      dockerfile: WordFinder.Api/Dockerfile
   wordfinder.web:
     image: ${DOCKER_REGISTRY-}wordfinderweb
     build:

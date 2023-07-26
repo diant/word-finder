@@ -1,34 +1,49 @@
 ﻿@model WordFinder.Web.Models.WordsViewModel
 @{    
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "WordFinder home is here!";
 }
 <form asp-controller="Home" asp-action="Index" autocomplete="off" style="width:80%; align-content:center" >
     <div class="input-group" style="align-items:center">
-        <input type="search" class="form-control" name="Letters" autocomplete="off" id="letters"
-                   autofocus maxlength="10" min="2" placeholder="Letters" asp-for="Letters" tabindex="0">
+        <input type="search" class="form-control" name="Letters" autocomplete="off" id="letters" spellcheck="false"
+                   autofocus maxlength="10" min="2" placeholder="Letters" asp-for="Letters" tabindex="0" style="margin-right:2px">
         <input type="submit" value="Search" class="btn btn-dark" />
     </div>
     <p class="fw-lighter fst-italic" style="font-size:x-small">Maximum 10 characters with one wildcard `*` character</p>
 
-    <div class="row align-items-center" style="margin-top:2em">
-        <div class="col">
-            <select class="form-select" aria-label="Minimum word length" asp-for="MinLen" name="MinLen" autocomplete="off" tabindex="1">
-                <option selected value="2">2 (Min word length)</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-            </select>
-        </div>
-        <div class="col">
-            <input type="text" class="col-form-label" name="Contains" autocomplete="off" placeholder="Contains" asp-for="Contains" />
-        </div>
-        <div class="col">
-            <input type="text" class="col-form-label" name="StartsWith" autocomplete="off" placeholder="Starts with ..." asp-for="StartsWith" />
-        </div>
-        <div class="col">
-            <input type="text" class="col-form-label" name="EndsWith" autocomplete="off" placeholder="Ends with ..." asp-for="EndsWith" />
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Advanced options
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse collapsed" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body row">
+                    <div class="col">
+                        <select class="form-select" aria-label="Minimum word length" asp-for="MinLen" name="MinLen" autocomplete="off" tabindex="1">
+                            <option selected value="2">2 (Min word length)</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="col-form-label" name="Contains" autocomplete="off" spellcheck="false" 
+                                    placeholder="Contains" asp-for="Contains" />
+                    </div>
+                    <div class="col">
+                        <input type="text" class="col-form-label" name="StartsWith" autocomplete="off" spellcheck="false" 
+                                    placeholder="Starts with ..." asp-for="StartsWith" />
+                    </div>
+                    <div class="col">
+                        <input type="text" class="col-form-label" name="EndsWith" autocomplete="off" spellcheck="false" 
+                                    placeholder="Ends with ..." asp-for="EndsWith" />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -47,7 +62,7 @@
                 <div class="container-md">
                     @foreach (var grp in Model.WordGroups.OrderByDescending(x => x.Title))
                     {
-                        <div class="card">
+                        <div class="card" style="margin:1em">
                             <div class="card-header">
                                 @grp.Title
                             </div>

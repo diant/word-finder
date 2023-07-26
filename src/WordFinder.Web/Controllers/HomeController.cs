@@ -44,4 +44,10 @@ public sealed class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+    public IActionResult About()
+    {
+        ViewData["Data"] = "this is the about page :)";
+        return View();
+    }
 }

@@ -26,7 +26,7 @@ namespace WordFinder.Web.Services
                             .OrderBy(x => x.Value)
                             .ToArray()))
                     .ToList(),
-                options.MinLength);
+                2);
         }
     }
 }

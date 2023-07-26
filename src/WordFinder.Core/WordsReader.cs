@@ -72,7 +72,7 @@ public static class WordsReader
         { 'z', 10 }
     };
 
-    private const string ResourceName = "WordFinder.Core.sowpods.txt";
+    private const string ResourceName = "WordFinder.Core.Dictionaries.sowpods.txt";
     private static IReadOnlyCollection<string> _words = new List<string>();
 
     public static async Task<IReadOnlyCollection<Word>> GetWords(
