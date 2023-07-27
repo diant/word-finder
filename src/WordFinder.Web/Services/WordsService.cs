@@ -14,7 +14,7 @@ namespace WordFinder.Web.Services
         public async Task<WordsViewModel> FindWordsAsync(SearchOptions options)
         {
             var words = await Core.WordFinder
-                .Find(options.Letters, options.Contains, options.StartsWith, options.EndsWith, options.MinLength);
+                .FindAsync(options.Letters, options.Contains, options.StartsWith, options.EndsWith, options.MinLength);
 
             return new(
                 options.Letters,

@@ -4,7 +4,7 @@ public static class WordFinder
 {
     public static async Task<IReadOnlyCollection<Word>> FindWithQ(bool withU = true)
     {
-        var words = await WordsReader.GetWords("q");
+        var words = await WordsReader.GetWordsAsync(40, "q");
         if (withU)
         {
             words = words.Where(w => w.Value.Contains('u', StringComparison.InvariantCultureIgnoreCase)).ToList();
@@ -16,14 +16,30 @@ public static class WordFinder
         return words;
     }
 
-    public static async Task<IReadOnlyCollection<Word>> Find(
+    [Obsolete("Please use the Find method. It's more efficient")]
+    public static async Task<IReadOnlyCollection<Word>> FindAsync(
         string letters, 
         string? contains = default,
         string? startsWith = default,
         string? endsWith = default,
         int minLen = 2)
     {
-        var words = await WordsReader.GetWords(contains, startsWith, endsWith);
+        var words = await WordsReader.GetWordsAsync(letters.Length, contains, startsWith, endsWith);
+        var result = letters.Contains('*') ?
+            FindWordsWithWildCard(words, letters, minLen) :
+            FindWords(words, letters, minLen);
+
+        return result;
+    }
+
+    public static IReadOnlyCollection<Word> Find(
+        string letters,
+        string? contains = default,
+        string? startsWith = default,
+        string? endsWith = default,
+        int minLen = 2)
+    {
+        var words = WordsReader.GetWords(letters.Length, contains, startsWith, endsWith);
         var result = letters.Contains('*') ?
             FindWordsWithWildCard(words, letters, minLen) :
             FindWords(words, letters, minLen);

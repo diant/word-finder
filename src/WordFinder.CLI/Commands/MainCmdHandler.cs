@@ -1,12 +1,18 @@
 ﻿using FluentValidation;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
+using System.Diagnostics.CodeAnalysis;
 using WordFinder.Core;
 
 namespace WordFinder.CLI.Commands;
 
 internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
-{    
+{
+    const string UNDERLINE = "\x1B[4m";
+    const string BOLD = "\u001b[1m";
+    const string YELLOW = "\u001b[33m";
+    const string RESET = "\x1B[0m";
+
     private readonly IConsole _console;
     private readonly IValidator<MainCmdRequest> validator;
 
@@ -16,30 +22,27 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
         this.validator = validator;
     }
 
-    public async Task<int> Handle(MainCmdRequest request, CancellationToken cancellationToken)
+    public Task<int> Handle(MainCmdRequest request, CancellationToken cancellationToken)
     {
         if (!request.Letters.Any())
         {
             request.App.ShowHelp();
-            return 0;
+            return Task.FromResult(0);
         }
 
         if (!ValidateRequest(request))
         {
-            return 0;
+            return Task.FromResult(0);
         }
 
         var grp = request.GroupBy == GroupBy.Length ? "letters" : request.GroupBy == 'p' ? "points" : "no grouping";
-        _console.ForegroundColor = ConsoleColor.Gray;
-        _console.Write($"Letters: `{request.Letters}`\tGroup: `{grp}`");
-        if (!string.IsNullOrWhiteSpace(request.Contains))
-        {
-            _console.Write($"\nContains: `{request.Contains}`");
-        }
-        _console.ResetColor();
-        _console.WriteLine();
+        _console.Write($"\nLetters: `{request.Letters}`\tGroup: `{grp}`");        
+        _console.Write($"\nContains: `{request.Contains}`\tStarts with: `{request.StartsWith}`\tEnds with: `{request.EndsWith}`");
 
-        var wordsFound = await Core.WordFinder.Find(request.Letters, request.Contains, request.StartsWith, request.EndsWith);
+        _console.WriteLine("\n--");
+
+        var wordsFound = Core.WordFinder.Find(request.Letters, request.Contains, request.StartsWith, request.EndsWith);
+
         if (request.GroupBy != GroupBy.None)
         {
             Func<Word, int> groupBy = request.GroupBy switch
@@ -50,25 +53,18 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
             };
 
             foreach (var group in wordsFound.GroupBy(groupBy).OrderByDescending(x => x.Key))
-            {   
-                _console.BackgroundColor = ConsoleColor.DarkYellow;
-                _console.ForegroundColor = ConsoleColor.Black;
-                _console.WriteLine($"\n{group.Key} {grp}");
-                _console.ResetColor();
-
-                _console.ForegroundColor = ConsoleColor.DarkYellow;
-                _console.WriteLine(string.Join(", ", group));
-                _console.ResetColor();
+            {
+                _console.WriteLine($"\n{YELLOW}{BOLD}{group.Key} {grp}{RESET}");
+                _console.WriteLine($"{YELLOW}{string.Join(", ", group)}{RESET}");
             }
         }
         else
         {
-            _console.ForegroundColor = ConsoleColor.DarkYellow;
             _console.WriteLine(string.Join(", ", wordsFound.OrderByDescending(x => x.Length).Select(x => x.Value)));
         }
 
         _console.ResetColor();
-        return 0;
+        return Task.FromResult(0);
     }
 
     private bool ValidateRequest(MainCmdRequest request)
