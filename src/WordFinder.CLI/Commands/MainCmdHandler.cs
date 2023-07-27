@@ -55,7 +55,7 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
             foreach (var group in wordsFound.GroupBy(groupBy).OrderByDescending(x => x.Key))
             {
                 _console.WriteLine($"\n{YELLOW}{BOLD}{group.Key} {grp}{RESET}");
-                _console.WriteLine($"{YELLOW}{string.Join(", ", group)}{RESET}");
+                _console.WriteLine($"{YELLOW}{string.Join(", ", group.OrderBy(x => x.Value))}{RESET}");
             }
         }
         else
@@ -63,7 +63,9 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
             _console.WriteLine(string.Join(", ", wordsFound.OrderByDescending(x => x.Length).Select(x => x.Value)));
         }
 
+        _console.WriteLine();
         _console.ResetColor();
+
         return Task.FromResult(0);
     }
 

@@ -7,10 +7,10 @@ namespace WordFinder.Benchmarks
     [ThreadingDiagnoser]
     public class WordReaderBenchmarks
     {
-        [Benchmark]
-        public async Task ReadWordsWithoutContainsAsync() => await Core.WordsReader.GetWordsAsync(7);
-        [Benchmark]
-        public void ReadWordsWithoutContains() => Core.WordsReader.GetWords(7);
+        //[Benchmark]
+        //public async Task ReadWordsWithoutContainsAsync() => await Core.WordsReader.GetWordsAsync(7);
+        //[Benchmark]
+        //public void ReadWordsWithoutContains() => Core.WordsReader.GetWords(7);
 
         //[Benchmark]
         //public async Task ReadWordsContainingOneLetterAsync() => await Core.WordsReader.GetWordsAsync("e");
