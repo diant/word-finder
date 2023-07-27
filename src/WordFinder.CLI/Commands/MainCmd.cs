@@ -21,7 +21,7 @@ namespace WordFinder.CLI.Commands
         public MainCmd(IMediator mediator) => _mediator = mediator;
 
         [Option(
-            Description = "Input letters (max 8). Use `*` for wildcard (max 1)",
+            Description = "Input letters (max 10). Use `*` for wildcard (max 1)",
             ShortName = "l",
             LongName = "letters",
             ShowInHelpText = true,
@@ -70,8 +70,17 @@ namespace WordFinder.CLI.Commands
                    )]
         public string EndsWith { get; set; } = default;
 
+        [Option(
+        Description = "Minimum word length (default 4)",
+                       ShortName = "ml",
+                       LongName = "min-len",
+                       ShowInHelpText = true,
+                       Inherited = true
+                   )]
+        public int MinLen { get; set; } = 4;
+
         public Task<int> OnExecute(CommandLineApplication app) => 
-            _mediator.Send(new MainCmdRequest(app, Letters, Group, Contains, StartsWith, EndsWith));
+            _mediator.Send(new MainCmdRequest(app, Letters, Group, Contains, StartsWith, EndsWith, MinLen));
 
         private static string GetVersion() => typeof(MainCmd).Assembly.GetName().Version!.ToString();
     }

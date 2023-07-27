@@ -29,5 +29,8 @@ public class MainCmdRequestValidator : AbstractValidator<MainCmdRequest>
         RuleFor(x => x.Letters)
             .Must(x => x.Count(c => c == '*') <= 1)
             .WithMessage("Letters must contain only one wildcard `*`");
+        RuleFor(x => x.MinLen)
+            .Must(x => x >= 2 && x <= 10)
+            .WithMessage("MinLen must be between 4 and 10");
     }
 }

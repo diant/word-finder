@@ -41,7 +41,7 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
 
         _console.WriteLine("\n--");
 
-        var wordsFound = Core.WordFinder.Find(request.Letters, request.Contains, request.StartsWith, request.EndsWith);
+        var wordsFound = Core.WordFinder.Find(request.Letters, request.Contains, request.StartsWith, request.EndsWith, request.MinLen);
 
         if (request.GroupBy != GroupBy.None)
         {

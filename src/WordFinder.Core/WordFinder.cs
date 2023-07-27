@@ -47,11 +47,19 @@ public static class WordFinder
         return result;
     }
 
+    public static bool ContainsAtLeastOne(this string s, char[] chars)
+    {
+        foreach (var c in s)
+            if (chars.Contains(c)) return true;
+        return false;
+    }
+
     private static IReadOnlyCollection<Word> FindWords(IEnumerable<Word> words, string letters, int minLen = 2)
     {
         List<Word> result = new();
 
-        foreach (var word in words.Where(x => x.Length >= minLen))
+        foreach (var word in words
+            .Where(x => x.Value.ContainsAtLeastOne(letters.ToCharArray()) && x.Length >= minLen && x.Length <= letters.Length))
         {
             var temp = letters;
             var found = true;

@@ -4,7 +4,7 @@ namespace WordFinder.Core.UnitTests
 {
     public class WordFinderTests
     {
-        const int TotalWords = 267750;
+        const int TotalWords = 74414; // words with length more than 2 and max 7 characters
 
         [Fact]
         public async Task WordsFileIsReadSuccess()

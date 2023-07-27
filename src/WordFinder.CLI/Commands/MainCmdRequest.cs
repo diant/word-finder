@@ -9,5 +9,6 @@ public record MainCmdRequest(
     char GroupBy, 
     string Contains,
     string StartsWith,
-    string EndsWith) 
+    string EndsWith,
+    int MinLen) 
     : IRequest<int>;

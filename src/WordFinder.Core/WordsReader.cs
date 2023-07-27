@@ -170,7 +170,7 @@ public static class WordsReader
 
     public static IReadOnlyCollection<string> ListWords(int maxLen) => LoadWordsFromFileAsEnumerable(maxLen).ToList();
 
-    public static IEnumerable<string> LoadWordsFromFileAsEnumerable(int maxLen = 7)
+    public static IEnumerable<string> LoadWordsFromFileAsEnumerable(int maxLen = 12)
     {
         using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(ResourceName);
         using var reader = new StreamReader(stream!);

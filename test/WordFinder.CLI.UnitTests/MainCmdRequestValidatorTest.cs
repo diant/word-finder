@@ -15,7 +15,7 @@ namespace WordFinder.CLI.UnitTests
         [InlineData("aaaaaaaa")]
         public void LettersContainMax8CharactersValidationSuccess(string letters)
         {
-            var request = new MainCmdRequest(default, letters, 'l', default, default, default);
+            var request = new MainCmdRequest(default, letters, 'l', default, default, default, 2);
             MainCmdRequestValidator validator = new();
             var result = validator.Validate(request);
             Assert.True(result.IsValid);
@@ -29,7 +29,7 @@ namespace WordFinder.CLI.UnitTests
         [InlineData("@3f")]
         public void LettersMustContainOnlyCharacters(string letters)
         {
-            var request = new MainCmdRequest(default, letters, default, default, default, default);
+            var request = new MainCmdRequest(default, letters, default, default, default, default, 2);
             MainCmdRequestValidator validator = new();
             var result = validator.Validate(request);
             Assert.False(result.IsValid);
