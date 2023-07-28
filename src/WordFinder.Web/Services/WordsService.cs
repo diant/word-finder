@@ -4,17 +4,19 @@ namespace WordFinder.Web.Services
 {
     public interface IWordsService
     {
-        Task<WordsViewModel> FindWordsAsync(SearchOptions options);
+        WordsViewModel FindWords(SearchOptions options);
     }
 
     public record SearchOptions(string Letters, int MinLength, string Contains, string StartsWith, string EndsWith);
 
     public sealed class WordsService : IWordsService
     {
-        public async Task<WordsViewModel> FindWordsAsync(SearchOptions options)
+        private const string DEF_URL = "https://www.wordreference.com/definition/";
+
+        public WordsViewModel FindWords(SearchOptions options)
         {
-            var words = await Core.WordFinder
-                .FindAsync(options.Letters, options.Contains, options.StartsWith, options.EndsWith, options.MinLength);
+            var words = Core.WordFinder
+                .Find(options.Letters, options.Contains, options.StartsWith, options.EndsWith, options.MinLength);
 
             return new(
                 options.Letters,
@@ -22,7 +24,7 @@ namespace WordFinder.Web.Services
                     GroupBy(x => x.Length)
                     .Select(x => new WordGroup(
                         $"{x.Key} letters",
-                        x.Select(x => new Word(x.Value, x.Points, $"https://www.wordreference.com/definition/{x.Value}"))
+                        x.Select(x => new Word(x.Value, x.Points, x.WildcardIndex, $"{DEF_URL}{x.Value}"))
                             .OrderBy(x => x.Value)
                             .ToArray()))
                     .ToList(),

@@ -2,10 +2,35 @@
 @{    
     ViewData["Title"] = "WordFinder home is here!";
 }
+
+<script type="text/javascript">
+ function bar(e) {
+        //var keynum;
+
+        //if (window.event) { // IE
+        //    keynum = e.keyCode;
+        //} else if (e.which) { // Netscape/Firefox/Opera
+        //    keynum = e.which;
+        //}
+
+        //console.log(keynum + ' - ' + String.fromCharCode(keynum));
+
+        //const container = document.getElementById('letters');
+        //console.log(container)
+        //console.log('container:' + e.keyCode)
+        //if (e.keyCode == 32) { //space
+        //    this.value = 'X';
+        //    console.log(this.value)
+        //}
+ }
+ </script>
+
 <form asp-controller="Home" asp-action="Index" autocomplete="off" style="width:80%; align-content:center" >
     <div class="input-group" style="align-items:center">
         <input type="search" class="form-control" name="Letters" autocomplete="off" id="letters" spellcheck="false"
-                   autofocus maxlength="10" min="2" placeholder="Letters" asp-for="Letters" tabindex="0" style="margin-right:2px">
+                    autofocus maxlength="10" min="2" placeholder="Letters" asp-for="Letters" tabindex="0" 
+                    style="margin-right:2px"
+                    onkeyup="return bar(event);">
         <input type="submit" value="Search" class="btn btn-dark" />
     </div>
     <p class="fw-lighter fst-italic" style="font-size:x-small">Maximum 10 characters with one wildcard `*` character</p>
@@ -69,10 +94,21 @@
                             <div class="card-body">
                                 @foreach (var word in grp.Words.OrderBy(x => x.Value))
                                 {
-                                    <a style="display:inline; font-weight:lighter; text-decoration:none; color:black" 
-                                        href=@word.DefinitionLink target="_blank">
-                                        @word.Value
-                                    </a>
+                                    if (word.WildcardIdex >= 0)
+                                    {
+                                        <a style="display:inline; font-weight:lighter; text-decoration:none; font-style:italic; color:#616161"
+                                           href=@word.DefinitionLink target="_blank">
+                                                @string.Format("{0} ({1})", word.Value, word.Value[word.WildcardIdex])
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a style="display:inline; font-weight:lighter; text-decoration:none; color:black"
+                                           href=@word.DefinitionLink target="_blank">
+                                            @word.Value
+                                        </a>
+                                    }
+                                    
                                     <span class="text-primary" style="display:inline; margin-top:10em; margin-right:15px; font-size:x-small;">
                                         @word.Points
                                     </span>

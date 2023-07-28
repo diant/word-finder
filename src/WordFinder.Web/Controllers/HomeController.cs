@@ -12,14 +12,14 @@ public sealed class HomeController : Controller
 
     public HomeController(IWordsService wordsService) => _wordsService = wordsService;
 
-    public async Task<IActionResult> Index(string letters, int minLen, string contains, string startsWith, string endsWith)
+    public IActionResult Index(string letters, int minLen, string contains, string startsWith, string endsWith)
     {
         if (string.IsNullOrWhiteSpace(letters))
         {
             return View();
         }
         
-        var model = await _wordsService.FindWordsAsync(new SearchOptions(letters, minLen, contains, startsWith, endsWith));
+        var model = _wordsService.FindWords(new SearchOptions(letters, minLen, contains, startsWith, endsWith));
         ViewData["ResultMsg"] = GetResultMessage(letters, minLen, contains, startsWith, endsWith);
         return View(model);
     }

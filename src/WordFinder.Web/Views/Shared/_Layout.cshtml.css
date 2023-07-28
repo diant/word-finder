@@ -47,3 +47,24 @@ button.accept-policy {
   line-height: 60px;
 }
 
+.word-with-wildcard {
+    display: inline;
+    font-weight: lighter;
+    text-decoration: none;
+    font-style: italic;
+    color: dimgrey;
+}
+
+.word {
+    display: inline;
+    font-weight: lighter;
+    text-decoration: none;
+    color: black;
+}
+
+.word-points {
+    display: inline;
+    margin-top: 10em;
+    margin-right: 15px;
+    font-size: x-small;
+}
