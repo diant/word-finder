@@ -82,7 +82,7 @@ namespace WordFinder.CLI.Commands
         public Task<int> OnExecute(CommandLineApplication app) => 
             _mediator.Send(new MainCmdRequest(app, Letters, Group, Contains, StartsWith, EndsWith, MinLen));
 
-        private static string GetVersion() => typeof(MainCmd).Assembly.GetName().Version!.ToString();
+        private static string GetVersion() => typeof(MainCmd).Assembly.GetName().Version!.ToString();        
     }
 
     public class GroupBy

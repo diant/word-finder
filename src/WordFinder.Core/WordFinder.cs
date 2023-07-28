@@ -118,6 +118,12 @@ public static class WordFinder
             if (found)
             {
                 var points = word.Value.Sum(c => WordsReader.LetterPoints[c]);
+                if (wildcardInx >= 0)
+                {
+                    var l = word.Value[wildcardInx];
+                    var wildcardPoints = WordsReader.LetterPoints[l];
+                    points -= wildcardPoints;
+                }
                 word.UpdatePoints(points);
                 word.WildcardIndex = wildcardInx;
                 result.Add(word);
