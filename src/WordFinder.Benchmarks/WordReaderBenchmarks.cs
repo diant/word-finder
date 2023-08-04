@@ -26,6 +26,5 @@ namespace WordFinder.Benchmarks
 
         //[Benchmark]
         //public async Task ReadWordsFromFile() => await Core.WordsReader.LoadWordsFromFile();
-
     }
 }

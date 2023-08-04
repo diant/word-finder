@@ -1,5 +1,3 @@
-﻿using WordFinder.Core;
+﻿namespace WordFinder.Api.Features.FindWords;
 
-namespace WordFinder.Api.Features.FindWords;
-
-public record FindWordsResponse(IReadOnlyCollection<Word> Words);
+public record FindWordsResponse(IReadOnlyCollection<WordDto> Words);

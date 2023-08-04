@@ -10,7 +10,7 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
     const string UNDERLINE = "\x1B[4m";
     const string BOLD = "\u001b[1m";
     const string YELLOW = "\u001b[33m";
-    const string MAGENTA = "\x1b[35m";
+    const string CYAN = "\x1b[36m";
     const string RESET = "\x1B[0m";
     const string SPACE = "  ";
 
@@ -70,7 +70,7 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
                         {
                             if (i == word.WildcardIndex)
                             {
-                                _console.Write("{0}{1}{2}{3}", MAGENTA, UNDERLINE, word.Value[i], RESET);
+                                _console.Write("{0}{1}{2}{3}", CYAN, UNDERLINE, word.Value[i], RESET);
                             }
                             else
                             {
@@ -84,6 +84,7 @@ internal sealed class MainCmdHandler : IRequestHandler<MainCmdRequest, int>
                         _console.Write("{0}{1}{2}{3}", YELLOW, word.Value, RESET, SPACE);
                     }
                 }
+                _console.WriteLine();
             }
         }
         else

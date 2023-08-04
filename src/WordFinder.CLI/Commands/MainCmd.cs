@@ -1,6 +1,7 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using WordFinder.CLI.Commands.Interactive;
+using WordFinder.CLI.Commands.Show;
 
 namespace WordFinder.CLI.Commands
 {
@@ -15,6 +16,7 @@ namespace WordFinder.CLI.Commands
     [VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]
     [HelpOption("-? | -h | --help")]
     [Subcommand(typeof(InteractiveCmd))]
+    [Subcommand(typeof(ShowCmd))]
     internal sealed class MainCmd
     {
         private readonly IMediator _mediator;
@@ -25,7 +27,6 @@ namespace WordFinder.CLI.Commands
             ShortName = "l",
             LongName = "letters",
             ShowInHelpText = true,
-            Inherited = true,
             ValueName = "LETTERS"
         )]
         public string Letters { get; set; } = string.Empty;
@@ -35,8 +36,7 @@ namespace WordFinder.CLI.Commands
             ShortName = "g",
             LongName = "group",
             ValueName = "l (length) | p (points) | n (no grouping)",
-            ShowInHelpText = true,
-            Inherited = true
+            ShowInHelpText = true
         )]
         public char Group { get; set; } = GroupBy.Length;
 
@@ -45,7 +45,6 @@ namespace WordFinder.CLI.Commands
                        ShortName = "c",
                        LongName = "contains",
                        ShowInHelpText = true,
-                       Inherited = true,
                        ValueName = "SUBSTRING"
                    )]
         public string Contains { get; set; } = default;
@@ -55,7 +54,6 @@ namespace WordFinder.CLI.Commands
                        ShortName = "s",
                        LongName = "starts-with",
                        ShowInHelpText = true,
-                       Inherited = true,
                        ValueName = "SUBSTRING"
                    )]
         public string StartsWith { get; set; } = default;
@@ -65,17 +63,15 @@ namespace WordFinder.CLI.Commands
                        ShortName = "e",
                        LongName = "ends-with",
                        ShowInHelpText = true,
-                       Inherited = true,
                        ValueName = "SUBSTRING"
                    )]
         public string EndsWith { get; set; } = default;
 
         [Option(
-        Description = "Minimum word length (default 4)",
+        Description = "Minimum word length",
                        ShortName = "ml",
                        LongName = "min-len",
-                       ShowInHelpText = true,
-                       Inherited = true
+                       ShowInHelpText = true
                    )]
         public int MinLen { get; set; } = 4;
 

@@ -75,7 +75,7 @@ public static class WordFinder
             }
             if (found)
             {
-                var points = word.Value.Sum(c => WordsReader.LetterPoints[c]);
+                var points = word.Value.Sum(c => LetterPoints.Points_SOWPODS[c]);
                 word.UpdatePoints(points);
                 result.Add(word);
             }
@@ -117,11 +117,11 @@ public static class WordFinder
             }
             if (found)
             {
-                var points = word.Value.Sum(c => WordsReader.LetterPoints[c]);
+                var points = word.Value.Sum(c => LetterPoints.Points_SOWPODS[c]);
                 if (wildcardInx >= 0)
                 {
                     var l = word.Value[wildcardInx];
-                    var wildcardPoints = WordsReader.LetterPoints[l];
+                    var wildcardPoints = LetterPoints.Points_SOWPODS[l];
                     points -= wildcardPoints;
                 }
                 word.UpdatePoints(points);

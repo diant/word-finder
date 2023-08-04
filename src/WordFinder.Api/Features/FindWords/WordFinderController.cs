@@ -20,7 +20,9 @@ public sealed class WordFinderController : ControllerBase
     //[Produces(typeof(FindWordsResponse))]
     public async Task<IActionResult> FindWords(FindWordsOptions options)
     {
-        var response = await _mediator.Send(new FindWordsRequest(options.Letters, options.StartsWith, options.Contains, options.EndsWith));
+        var response = await _mediator.Send(
+            new FindWordsRequest(options.Letters, options.StartsWith, options.Contains, options.EndsWith, options.MinLen)
+        );
         return Ok(response);
     }
 }

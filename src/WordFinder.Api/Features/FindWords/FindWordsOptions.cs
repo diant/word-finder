@@ -5,5 +5,6 @@ public record FindWordsOptions(
     FindWordsGroupOptions GroupOptions = FindWordsGroupOptions.Length,
     string? StartsWith = default,
     string? Contains = default,
-    string? EndsWith = default
+    string? EndsWith = default,
+    int MinLen = 2
 );
