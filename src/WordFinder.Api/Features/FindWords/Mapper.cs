@@ -2,8 +2,8 @@
 
 namespace WordFinder.Api.Features.FindWords;
 
-public static class Mapper
+internal static class Mapper
 {
-    public static WordDto Map(Word word) =>
-        new WordDto(word.Value, word.Points, word.Length, word.WildcardIndex);
+    internal static WordDto Map(Word word) =>
+        new(word.Value, word.Points, word.Length, word.WildcardIndex);
 }

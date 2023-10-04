@@ -39,7 +39,7 @@ public static class WordsReader
             .Where(containsFilter)
             .Where(startsWithFilter)
             .Where(endsWithFilter)
-            .Select(x => new Word(x.ToLower(), x.Length))
+            .Select(x => x.MapToWord())
             .ToList();
     }
 
@@ -75,7 +75,7 @@ public static class WordsReader
             .Where(containsFilter)
             .Where(startsWithFilter)
             .Where(endsWithFilter)
-            .Select(x => new Word(x.ToLower(), x.Length))
+            .Select(x => x.MapToWord())
             .ToList();
     }
 
