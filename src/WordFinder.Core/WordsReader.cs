@@ -13,7 +13,7 @@ public static class WordsReader
         string? startsWith = default, 
         string? endsWith = default)
     {
-        if (!_words.Any()) 
+        if (_words.Count == 0) 
         {
             _words = await ListWordsAsync(maxLen);
         }
@@ -49,7 +49,7 @@ public static class WordsReader
         string? startsWith = default,
         string? endsWith = default)
     {
-        if (!_words.Any())
+        if (_words.Count == 0)
         {
             _words = ListWords(maxLen);
         }
