@@ -2,36 +2,6 @@
 
 public static class WordFinder
 {
-    public static async Task<IReadOnlyCollection<Word>> FindWithQ(bool withU = true)
-    {
-        var words = await WordsReader.GetWordsAsync(40, "q");
-        if (withU)
-        {
-            words = words.Where(w => w.Value.Contains('u', StringComparison.InvariantCultureIgnoreCase)).ToList();
-        }
-        else
-        {
-            words = words.Where(w => !w.Value.Contains('u', StringComparison.InvariantCultureIgnoreCase)).ToList();
-        }
-        return words;
-    }
-
-    [Obsolete("Please use the Find method. It's more efficient")]
-    public static async Task<IReadOnlyCollection<Word>> FindAsync(
-        string letters, 
-        string? contains = default,
-        string? startsWith = default,
-        string? endsWith = default,
-        int minLen = 2)
-    {
-        var words = await WordsReader.GetWordsAsync(letters.Length, contains, startsWith, endsWith);
-        var result = letters.Contains('*') ?
-            FindWordsWithWildCard(words, letters, minLen) :
-            FindWords(words, letters, minLen);
-
-        return result;
-    }
-
     public static IReadOnlyCollection<Word> Find(
         string letters,
         string? contains = default,
@@ -56,7 +26,7 @@ public static class WordFinder
 
     private static IReadOnlyCollection<Word> FindWords(IEnumerable<Word> words, string letters, int minLen = 2)
     {
-        List<Word> result = new();
+        List<Word> result = [];
 
         foreach (var word in words
             .Where(x => x.Value.ContainsAtLeastOne(letters.ToCharArray()) && x.Length >= minLen && x.Length <= letters.Length))
@@ -86,7 +56,7 @@ public static class WordFinder
 
     private static IReadOnlyCollection<Word> FindWordsWithWildCard(IEnumerable<Word> words, string letters, int minLen = 2)
     {
-        List<Word> result = new();
+        List<Word> result = [];
 
         foreach (var word in words
             .Where(x => x.Value.ContainsAtLeastOne(letters.ToCharArray()) && x.Length >= minLen && x.Length <= letters.Length + 1))

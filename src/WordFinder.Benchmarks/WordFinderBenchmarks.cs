@@ -11,8 +11,5 @@ namespace WordFinder.Benchmarks
 
         [Benchmark]
         public void FindWordsWithLetters() => Core.WordFinder.Find(Letters);
-
-        [Benchmark]
-        public async Task FindWordsWithLettersAsync() => await Core.WordFinder.FindAsync(Letters);
     }
 }
