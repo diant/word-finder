@@ -20,8 +20,7 @@ builder.Services.AddCors(options =>
                 .AllowAnyHeader(); 
         });
 });
-
-builder.Services.AddWordFinder();
+builder.Services.AddApplicationServices();
 builder.Services.Configure<JsonOptions>(options => {
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
@@ -37,11 +36,9 @@ if (app.Environment.IsDevelopment())
         action.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.Full);
     });
 }
-
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
-
-app.MapFindWordsEndpoints();
-    
+app.UseRateLimiter();
+app.MapFindWordsEndpoints();    
 
 app.Run();

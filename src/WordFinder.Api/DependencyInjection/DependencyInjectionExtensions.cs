@@ -1,12 +1,13 @@
 ﻿using FluentValidation;
 using MediatR;
 using WordFinder.Api.Middlewares;
+using WordFinder.Core.Web;
 
 namespace WordFinder.Api.DependencyInjection
 {
     public static class DependencyInjectionExtensions
     {
-        public static IServiceCollection AddWordFinder(this IServiceCollection services)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddValidatorsFromAssemblyContaining<Program>();
 
@@ -16,6 +17,8 @@ namespace WordFinder.Api.DependencyInjection
                 configuration.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
                 configuration.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
+
+            services.AddRateLimiter();
 
             return services;
         }

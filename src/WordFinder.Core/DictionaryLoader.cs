@@ -2,7 +2,7 @@
 
 namespace WordFinder.Core;
 
-public static class WordsReader
+public static class DictionaryLoader
 {
     private const string ResourceName = "WordFinder.Core.Dictionaries.sowpods.txt";
     private static IReadOnlyCollection<string> _words = new List<string>();
@@ -15,7 +15,7 @@ public static class WordsReader
     {
         if (_words.Count == 0)
         {
-            _words = ListWords(maxLen);
+            _words = LoadWordsFromFileAsEnumerable(maxLen).ToList();
         }
 
         Func<string, bool> containsFilter = x => true;
@@ -43,9 +43,7 @@ public static class WordsReader
             .ToList();
     }
 
-    public static IReadOnlyCollection<string> ListWords(int maxLen) => LoadWordsFromFileAsEnumerable(maxLen).ToList();
-
-    public static IEnumerable<string> LoadWordsFromFileAsEnumerable(int maxLen = 12)
+    private static IEnumerable<string> LoadWordsFromFileAsEnumerable(int maxLen = 12)
     {
         using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(ResourceName);
         using var reader = new StreamReader(stream!);

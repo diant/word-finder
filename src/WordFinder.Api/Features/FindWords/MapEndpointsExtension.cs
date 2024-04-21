@@ -13,7 +13,7 @@ public static class MapEndpointsExtension
                  await mediator.Send(new FindWordsRequest(options.Letters, options.StartsWith, options.Contains, options.EndsWith, options.MinLen)))
         .WithName("Wordfinder")
         .AllowAnonymous()
-        .Produces<FindWordsResponse>()
+        .Produces<FindWordsResponse>(StatusCodes.Status200OK)
         .WithOpenApi();
 
         return app;

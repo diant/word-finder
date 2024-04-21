@@ -9,7 +9,7 @@ public static class WordFinder
         string? endsWith = default,
         int minLen = 2)
     {
-        var words = WordsReader.GetWords(letters.Length, contains, startsWith, endsWith);
+        var words = DictionaryLoader.GetWords(letters.Length, contains, startsWith, endsWith);
         var result = letters.Contains('*') ?
             FindWordsWithWildCard(words, letters, minLen) :
             FindWords(words, letters, minLen);
@@ -17,14 +17,14 @@ public static class WordFinder
         return result;
     }
 
-    public static bool ContainsAtLeastOne(this string s, char[] chars)
+    private static bool ContainsAtLeastOne(this string s, char[] chars)
     {
         foreach (var c in s.AsSpan())
             if (chars.Contains(c)) return true;
         return false;
     }
 
-    private static IReadOnlyCollection<Word> FindWords(IEnumerable<Word> words, string letters, int minLen = 2)
+    private static List<Word> FindWords(IEnumerable<Word> words, string letters, int minLen = 2)
     {
         List<Word> result = [];
 
@@ -54,7 +54,7 @@ public static class WordFinder
         return result;
     }
 
-    private static IReadOnlyCollection<Word> FindWordsWithWildCard(IEnumerable<Word> words, string letters, int minLen = 2)
+    private static List<Word> FindWordsWithWildCard(IEnumerable<Word> words, string letters, int minLen = 2)
     {
         List<Word> result = [];
 
